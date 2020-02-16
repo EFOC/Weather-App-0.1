@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
                 Log.d("TEST", "code: " + response?.body()?.code + "\n" +
                         "Coordinates: " + response?.body()?.coordinates?.lat +
-                        " and " + response?.body()?.coordinates?.lon)
+                        " and " + response?.body()?.coordinates?.lon + " " +
+                        "\n description: " + response?.body()?.weather?.get(0)?.descrption + "" +
+                        "\n max temp: " + response?.body()?.mainInfo?.maxTemp)
             }
         })
     }
