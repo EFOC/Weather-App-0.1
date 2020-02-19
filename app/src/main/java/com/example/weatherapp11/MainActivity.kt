@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -35,12 +36,16 @@ class MainActivity : AppCompatActivity() {
         adapter = RecyclerViewAdapter(this)
         val linearLayout = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayout
-        recyclerView.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        mainActivityViewModel.selectedItemOption(this, item)
+        return super.onOptionsItemSelected(item)
     }
 }
