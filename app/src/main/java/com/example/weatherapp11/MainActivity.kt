@@ -2,6 +2,8 @@ package com.example.weatherapp11
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
                 recyclerView.adapter = adapter
                 Log.d("TEST", "in observe: " + list[0]?.mainInfo?.feelsLike)})
-
     }
 
     fun initRecyclerView() {
@@ -35,5 +36,11 @@ class MainActivity : AppCompatActivity() {
         val linearLayout = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayout
         recyclerView.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 }
