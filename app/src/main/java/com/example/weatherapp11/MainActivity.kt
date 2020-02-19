@@ -3,39 +3,37 @@ package com.example.weatherapp11
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapp11.Adapters.RecyclerViewAdapter
 import com.example.weatherapp11.Model.WeatherInfo
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mainActivityViewModel: MainActivityViewModel
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter: RecyclerViewAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        recyclerView = findViewById(R.id.recyclerview)
+        mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
+        initRecyclerView()
+        mainActivityViewModel.getAllWeather().observe(this,
+            Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
+                recyclerView.adapter = adapter
+                Log.d("TEST", "in observe: " + list[0]?.mainInfo?.feelsLike)})
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val jsonWeatherApi: JsonWeatherApi = retrofit.create(JsonWeatherApi::class.java)
+    }
 
-        val test: Call<WeatherInfo> = jsonWeatherApi.getWeatherInfo("toronto", "65c8bbb29469fa0f101001642a325d13")
-        test.enqueue(object : Callback<WeatherInfo> {
-            override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
-                Log.d("TEST", "error: " + t.toString())
-            }
-
-            override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
-                Log.d("TEST", "code: " + response?.body()?.code + "\n" +
-                        "Coordinates: " + response?.body()?.coordinates?.lat +
-                        " and " + response?.body()?.coordinates?.lon + " " +
-                        "\n description: " + response?.body()?.weather?.get(0)?.descrption + "" +
-                        "\n max temp: " + response?.body()?.mainInfo?.maxTemp)
-            }
-        })
+    fun initRecyclerView() {
+        adapter = RecyclerViewAdapter(this)
+        val linearLayout = LinearLayoutManager(this)
+        recyclerView.layoutManager = linearLayout
+        recyclerView.adapter = adapter
     }
 }
