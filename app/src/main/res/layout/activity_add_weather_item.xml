@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddWeatherItemActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter City Name"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"/>
-
-    <EditText
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:singleLine="true"
-        android:hint="City Name" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".AddWeatherItemActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        android:textSize="15sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Enter City Name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/add_weather_city_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:hint="City Name"
+            android:singleLine="true"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/add_weather_done_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Done"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</layout>

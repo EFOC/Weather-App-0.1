@@ -1,5 +1,6 @@
 package com.example.weatherapp11
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Adapters.RecyclerViewAdapter
 import com.example.weatherapp11.Model.WeatherInfo
+import com.example.weatherapp11.ViewModels.MainActivityViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,10 +28,9 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerview)
         mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
         initRecyclerView()
-        mainActivityViewModel.getAllWeather().observe(this,
-            Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
-                recyclerView.adapter = adapter
-                Log.d("TEST", "in observe: " + list[0]?.mainInfo?.feelsLike)})
+//        mainActivityViewModel.getAllWeather().observe(this,
+//            Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
+//                recyclerView.adapter = adapter })
     }
 
     fun initRecyclerView() {
@@ -45,7 +46,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        mainActivityViewModel.selectedItemOption(this, item)
+        if (item?.itemId == R.id.menu_add_item) {
+            val intent = Intent(this, AddWeatherItemActivity::class.java)
+            startActivityForResult(intent, 1)
+        }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            mainActivityViewModel.getAllWeather(data.getStringExtra("city")).observe(this,
+                Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
+                    recyclerView.adapter = adapter })
+        }
+    }
+
 }
