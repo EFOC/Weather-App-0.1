@@ -32,9 +32,9 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cityName.text = "Toronto"
+        holder.cityName.text = weatherList.get(position)?.nameOfCity.toString()
         Log.d("TEST", "feels like: " + weatherList.get(position)?.mainInfo?.feelsLike)
-        holder.feelsLike.text = weatherList.get(position)?.mainInfo?.feelsLike.toString()
+        holder.feelsLike.text = weatherList.get(position)?.mainInfo?.maxTemp.toString()
     }
 
     fun setWeather(list: ArrayList<WeatherInfo?>){
