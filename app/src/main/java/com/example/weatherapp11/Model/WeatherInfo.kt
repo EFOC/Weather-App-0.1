@@ -13,6 +13,9 @@ class WeatherInfo {
     @SerializedName("main")
     lateinit var mainInfo: MainWeatherInfo
 
+    @SerializedName("name")
+    lateinit var nameOfCity: String
+
     @SerializedName("cod")
     var code: Int = 0
 }
