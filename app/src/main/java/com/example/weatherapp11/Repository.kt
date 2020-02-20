@@ -28,10 +28,10 @@ object Repository {
          cities = jsonWeatherApi.getWeatherInfo("toronto", "65c8bbb29469fa0f101001642a325d13")
     }
 
-    fun getWeather(): MutableLiveData<ArrayList<WeatherInfo?>> {
+    fun getWeather(city: String): MutableLiveData<ArrayList<WeatherInfo?>> {
         val allWeatherInfo: ArrayList<WeatherInfo?> = ArrayList()
         var weather: WeatherInfo? = null
-        cities = jsonWeatherApi.getWeatherInfo("toronto", "65c8bbb29469fa0f101001642a325d13")
+        cities = jsonWeatherApi.getWeatherInfo(city, "65c8bbb29469fa0f101001642a325d13")
         cities.enqueue(object : Callback<WeatherInfo> {
 
             override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
