@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
     <TextView
@@ -13,10 +13,24 @@
         android:layout_margin="10dp" />
 
     <TextView
+        android:id="@+id/item_max_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/item_city_name"
+        android:layout_toEndOf="@+id/item_city_name"/>
+
+    <TextView
+        android:id="@+id/item_min_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/item_city_name"
+        android:layout_toEndOf="@+id/item_max_temp"/>
+
+    <TextView
         android:id="@+id/item_feels_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/item_city_name"/>
-
+        android:layout_alignTop="@+id/item_city_name"
+        android:layout_toEndOf="@+id/item_min_temp"/>
 
 </RelativeLayout>
