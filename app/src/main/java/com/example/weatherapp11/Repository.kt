@@ -15,7 +15,10 @@ object Repository {
     var jsonWeatherApi: JsonWeatherApi
     lateinit var cities: Call<WeatherInfo>
     var list: MutableLiveData<ArrayList<WeatherInfo?>>
+    val allWeatherInfo: ArrayList<WeatherInfo?> = ArrayList()
+
     init {
+        Log.d("TEST", "Creating repo")
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -29,7 +32,6 @@ object Repository {
     }
 
     fun getWeather(city: String): MutableLiveData<ArrayList<WeatherInfo?>> {
-        val allWeatherInfo: ArrayList<WeatherInfo?> = ArrayList()
         var weather: WeatherInfo? = null
         cities = jsonWeatherApi.getWeatherInfo(city, "65c8bbb29469fa0f101001642a325d13")
         cities.enqueue(object : Callback<WeatherInfo> {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Model.Weather
 import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.R
+import org.w3c.dom.Text
 
 class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
@@ -27,23 +28,24 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
     }
 
     override fun getItemCount(): Int {
-        Log.d("TEST", "itemcount: " + weatherList.size)
         return weatherList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cityName.text = weatherList.get(position)?.nameOfCity.toString()
-        Log.d("TEST", "feels like: " + weatherList.get(position)?.mainInfo?.feelsLike)
-        holder.feelsLike.text = weatherList.get(position)?.mainInfo?.maxTemp.toString()
+        holder.cityName.text = "City Name: " + weatherList.get(position)?.nameOfCity.toString()
+        holder.feelsLike.text = "Feels Like: " + weatherList.get(position)?.mainInfo?.maxTemp.toString()
+        holder.maxTemp.text = "Max Temp: " + weatherList.get(position)?.mainInfo?.maxTemp.toString()
+        holder.minTemp.text = "Min Temp: " + weatherList.get(position)?.mainInfo?.minTemp.toString()
     }
 
     fun setWeather(list: ArrayList<WeatherInfo?>){
         weatherList = list
-        Log.d("TEST", "setting weather: " + weatherList[0]?.mainInfo?.feelsLike)
     }
 
     class ViewHolder(itemHolder: View): RecyclerView.ViewHolder(itemHolder) {
         var cityName = itemHolder.findViewById<TextView>(R.id.item_city_name)
         var feelsLike = itemHolder.findViewById<TextView>(R.id.item_feels_like)
+        var maxTemp = itemHolder.findViewById<TextView>(R.id.item_max_temp)
+        var minTemp = itemHolder.findViewById<TextView>(R.id.item_min_temp)
     }
 }
