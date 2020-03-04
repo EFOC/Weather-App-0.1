@@ -16,7 +16,7 @@ import org.w3c.dom.Text
 
 class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    var weatherList: ArrayList<WeatherInfo?>
+    var weatherList: ArrayList<WeatherInfo>
 
     init {
         weatherList = ArrayList()
@@ -38,7 +38,7 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
         holder.minTemp.text = "Min Temp: " + weatherList.get(position)?.mainInfo?.minTemp.toString()
     }
 
-    fun setWeather(list: ArrayList<WeatherInfo?>){
+    fun setWeather(list: ArrayList<WeatherInfo>){
         weatherList = list
     }
 
