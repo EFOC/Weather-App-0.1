@@ -2,7 +2,6 @@ package com.example.weatherapp11
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.recyclerview)
-        mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         initRecyclerView()
 //        mainActivityViewModel.getAllWeather().observe(this,
 //            Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null) {
             mainActivityViewModel.getAllWeather(data.getStringExtra("city")).observe(this,
-                Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
+                Observer<ArrayList<WeatherInfo>> { list -> adapter.setWeather(list)
                     recyclerView.adapter = adapter })
         }
     }
