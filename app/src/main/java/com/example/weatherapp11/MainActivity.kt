@@ -2,10 +2,13 @@ package com.example.weatherapp11
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,22 +20,37 @@ import com.example.weatherapp11.ViewModels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mainActivityViewModel: MainActivityViewModel
-    lateinit var recyclerView: RecyclerView
-    lateinit var adapter: RecyclerViewAdapter
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: RecyclerViewAdapter
+    lateinit var btn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.recyclerview)
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
         initRecyclerView()
-//        mainActivityViewModel.getAllWeather().observe(this,
-//            Observer<ArrayList<WeatherInfo?>> { list -> adapter.setWeather(list)
-//                recyclerView.adapter = adapter })
+
+        val weatherRetrieved: LiveData<WeatherInfo> = mainActivityViewModel.getWeather("toronto")
+        weatherRetrieved.observe(this,
+            Observer {
+                mainActivityViewModel.weatherList.add(weatherRetrieved)
+                adapter.setWeather(mainActivityViewModel.weatherList)
+                recyclerView.adapter = adapter
+            })
+
+        btn = findViewById(R.id.btn)
+        btn.setOnClickListener {
+            mainActivityViewModel.getAll().observe(this, Observer { list ->
+                list.forEach {
+                    Log.d("TEST", "getting weather of: " + it.nameOfCity)
+                }
+            })
+        }
     }
 
-    fun initRecyclerView() {
+    private fun initRecyclerView() {
         adapter = RecyclerViewAdapter(this)
         val linearLayout = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayout
@@ -55,10 +73,14 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null) {
-            mainActivityViewModel.getAllWeather(data.getStringExtra("city")).observe(this,
-                Observer<ArrayList<WeatherInfo>> { list -> adapter.setWeather(list)
-                    recyclerView.adapter = adapter })
+            val city = data.getStringExtra("city")
+            val weatherRetrieved: LiveData<WeatherInfo> = mainActivityViewModel.getWeather(city)
+            weatherRetrieved.observe(this@MainActivity,
+                Observer {
+                    mainActivityViewModel.weatherList.add(weatherRetrieved)
+                    adapter.setWeather(mainActivityViewModel.weatherList)
+                    recyclerView.adapter = adapter
+                })
         }
     }
-
 }
