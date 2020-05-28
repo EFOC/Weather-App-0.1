@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [WeatherEntity::class], version = 1, exportSchema = false)
+@Database(entities = [WeatherEntity::class], version = 2, exportSchema = false)
 abstract class WeatherDatabase: RoomDatabase() {
     abstract fun weatherDao(): WeatherDao
 
@@ -44,8 +44,8 @@ abstract class WeatherDatabase: RoomDatabase() {
 
         suspend fun populateDatabase(weatherDao: WeatherDao) {
             weatherDao.deleteAll()
-            weatherDao.insert(WeatherEntity("TEST1", 20F, 2F, 3F))
-            weatherDao.insert(WeatherEntity("TEST2", 40F, 2F, 3F))
+            weatherDao.insert(WeatherEntity("Vaughan"))
+            weatherDao.insert(WeatherEntity("New York"))
         }
     }
 }
