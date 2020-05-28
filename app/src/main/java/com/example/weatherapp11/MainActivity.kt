@@ -42,11 +42,26 @@ class MainActivity : AppCompatActivity() {
 
         btn = findViewById(R.id.btn)
         btn.setOnClickListener {
-            mainActivityViewModel.getAll().observe(this, Observer { list ->
-                list.forEach {
-                    Log.d("TEST", "getting weather of: " + it.nameOfCity)
+            mainActivityViewModel.getAll().observe(this, Observer {list ->
+                list.forEach {city ->
+                    Log.d("TEST", "city coming in: $city")
+                    mainActivityViewModel.weatherList.add(mainActivityViewModel.getWeather(city))
                 }
+                adapter.weatherList = mainActivityViewModel.weatherList
+                recyclerView.adapter = adapter
             })
+
+//                .value?.forEach {city ->
+//                mainActivityViewModel.weatherList.add(mainActivityViewModel.getWeather(city))
+//            }
+//            adapter.weatherList = mainActivityViewModel.weatherList
+//            recyclerView.adapter = adapter
+//                .observe(this, Observer { list ->
+//                list.forEach {
+//                    Log.d("TEST", "getting weather of: $it")
+//
+//                }
+//            })
         }
     }
 

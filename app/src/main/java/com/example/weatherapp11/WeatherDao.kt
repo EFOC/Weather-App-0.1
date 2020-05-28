@@ -2,23 +2,21 @@ package com.example.weatherapp11
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.weatherapp11.Model.WeatherInfo
 
 @Dao
 interface WeatherDao {
 
     @Insert
-    suspend fun insert(weather: WeatherEntity)
+    suspend fun insert(city: WeatherEntity)
 
     @Update
-    suspend fun update(weather: WeatherEntity)
+    suspend fun update(city: WeatherEntity)
 
 //    @Delete
 //    suspend fun delete(weather: WeatherInfo)
 
-
     @Query("SELECT * FROM weather_table")
-    fun getAllWeather(): LiveData<List<WeatherEntity>>
+    fun getAllWeather(): LiveData<List<String>>
 
     @Query("DELETE FROM weather_table")
     suspend fun deleteAll()

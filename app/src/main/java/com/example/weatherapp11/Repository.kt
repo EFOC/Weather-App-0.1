@@ -41,11 +41,11 @@ class Repository(var weatherDao: WeatherDao) {
         return liveWeather
     }
 
-    suspend fun insert(weatherEntity: WeatherEntity) {
-        weatherDao.insert(weatherEntity)
+    suspend fun insert(city: String) {
+        weatherDao.insert(WeatherEntity(city))
     }
 
-    fun getAll(): LiveData<List<WeatherEntity>> {
+    fun getAll(): LiveData<List<String>> {
         return weatherDao.getAllWeather()
     }
 }
