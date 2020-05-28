@@ -23,35 +23,14 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         return repo.getWeather(city)
     }
 
-    fun getAll(): LiveData<ArrayList<WeatherInfo>> {
-        val repoList: LiveData<List<WeatherEntity>> = repo.getAll()
-        val liveList: LiveData<ArrayList<WeatherInfo>>
-        liveList = Transformations.map(repoList) { list ->
-            val newList: ArrayList<WeatherInfo> = ArrayList()
-            list?.forEach {
-                val temp = WeatherInfo()
-                temp.mainInfo = MainWeatherInfo()
-                temp.nameOfCity = it.nameOfCity
-                temp.mainInfo.feelsLike = it.feelsLike
-                temp.mainInfo.maxTemp = it.maxTemp
-                temp.mainInfo.minTemp = it.minTemp
-                newList.add(temp)
-            }
-            return@map newList
-        }
-        return liveList
+    fun getAll(): LiveData<List<String>> {
+        return repo.getAll()
     }
 
     // @TODO Insert only name of city
-    fun insert(weatherInfo: WeatherInfo) {
+    fun insert(city: String) {
         viewModelScope.launch {
-            val weatherEntity = WeatherEntity(
-                weatherInfo.nameOfCity,
-                weatherInfo.mainInfo.feelsLike,
-                weatherInfo.mainInfo.maxTemp,
-                weatherInfo.mainInfo.minTemp
-            )
-            repo.insert(weatherEntity)
+            repo.insert(city)
         }
     }
 }
