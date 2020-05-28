@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -23,6 +25,10 @@ android {
     dataBinding {
         enabled = true
     }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
@@ -32,6 +38,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation "androidx.room:room-ktx:$room_version"
+    // Room components
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:2.2.5"
+    kapt "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
     // optional - Guava support for Room, including Optional and ListenableFuture
