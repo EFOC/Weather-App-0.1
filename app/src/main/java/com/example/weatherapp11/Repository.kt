@@ -4,10 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weatherapp11.Model.WeatherInfo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +14,7 @@ class Repository(var weatherDao: WeatherDao) {
 
     private var jsonWeatherApi: JsonWeatherApi
     lateinit var cities: Call<WeatherInfo>
-    val s: MutableLiveData<ArrayList<WeatherInfo>> = MutableLiveData()
+    val liveDataList: MutableLiveData<ArrayList<WeatherInfo>> = MutableLiveData()
 
     init {
         val retrofit = Retrofit.Builder()
@@ -29,7 +25,7 @@ class Repository(var weatherDao: WeatherDao) {
     }
 
     fun getWeather(cityList: List<String>): LiveData<ArrayList<WeatherInfo>> {
-        val t: ArrayList<WeatherInfo> = ArrayList()
+        val tempList: ArrayList<WeatherInfo> = ArrayList()
         cityList.forEach {city ->
             cities = jsonWeatherApi.getWeatherInfo(city, "65c8bbb29469fa0f101001642a325d13")
             cities.enqueue(object : Callback<WeatherInfo> {
@@ -39,13 +35,13 @@ class Repository(var weatherDao: WeatherDao) {
 
                 override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
                     if (response!!.isSuccessful) {
-                        t.add(response.body()!!)
-                        s.value = t
+                        tempList.add(response.body()!!)
+                        liveDataList.value = tempList
                     }
                 }
             })
         }
-        return s
+        return liveDataList
     }
 
     suspend fun insert(city: String) {
