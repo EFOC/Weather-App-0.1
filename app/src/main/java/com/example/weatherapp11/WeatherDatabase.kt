@@ -33,6 +33,7 @@ abstract class WeatherDatabase: RoomDatabase() {
     }
 
     private class WeatherDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
+
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
             INSTANCE?.let { weatherDatabase ->
