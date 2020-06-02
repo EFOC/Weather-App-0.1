@@ -13,8 +13,7 @@ import com.example.weatherapp11.R
 
 class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-//    var weatherList: ArrayList<WeatherInfo>
-    var weatherList: ArrayList<LiveData<WeatherInfo>>
+      var weatherList: List<WeatherInfo>
 
     init {
         weatherList = ArrayList()
@@ -22,7 +21,6 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.weather_item, parent, false)
-        Log.d("TEST", "creating adapter")
         return ViewHolder(view)
     }
 
@@ -31,13 +29,13 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cityName.text = "City Name: " + weatherList.get(position)?.value?.nameOfCity.toString()
-        holder.feelsLike.text = "Feels Like: " + weatherList.get(position)?.value?.mainInfo?.maxTemp.toString()
-        holder.maxTemp.text = "Max Temp: " + weatherList.get(position)?.value?.mainInfo?.maxTemp.toString()
-        holder.minTemp.text = "Min Temp: " + weatherList.get(position)?.value?.mainInfo?.minTemp.toString()
+        holder.cityName.text = "City Name: " + weatherList.get(position)?.nameOfCity.toString()
+        holder.feelsLike.text = "Feels Like: " + weatherList.get(position)?.mainInfo?.maxTemp.toString()
+        holder.maxTemp.text = "Max Temp: " + weatherList.get(position)?.mainInfo?.maxTemp.toString()
+        holder.minTemp.text = "Min Temp: " + weatherList.get(position)?.mainInfo?.minTemp.toString()
     }
 
-    fun setWeather(list: ArrayList<LiveData<WeatherInfo>>){
+    fun setWeather(list: ArrayList<WeatherInfo>){
         weatherList = list
     }
 
