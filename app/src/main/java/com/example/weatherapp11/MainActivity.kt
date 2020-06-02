@@ -39,10 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         btn = findViewById(R.id.btn)
         btn.setOnClickListener {
-            mainActivityViewModel.getAll().observe(this, Observer {
-                adapter.setWeather(it)
-                recyclerView.adapter = adapter
-            })
+            refreshWeatherList()
         }
     }
 
@@ -68,15 +65,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-//        if (data != null) {
-//            val city = data.getStringExtra("city")
-//            val weatherRetrieved: LiveData<WeatherInfo> = mainActivityViewModel.getWeather(city)
-//            weatherRetrieved.observe(this@MainActivity,
-//                Observer {
-//                    mainActivityViewModel.weatherList.add(weatherRetrieved)
-//                    adapter.setWeather(mainActivityViewModel.weatherList)
-//                    recyclerView.adapter = adapter
-//                })
-//        }
+        if (data != null) {
+            val city = data.getStringExtra("city")
+            mainActivityViewModel.insert(city)
+            refreshWeatherList()
+        }
+    }
+
+    private fun refreshWeatherList() {
+        mainActivityViewModel.getAll().observe(this, Observer {
+            adapter.setWeather(it)
+            recyclerView.adapter = adapter
+        })
     }
 }
