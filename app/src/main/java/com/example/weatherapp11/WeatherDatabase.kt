@@ -45,8 +45,8 @@ abstract class WeatherDatabase: RoomDatabase() {
 
         suspend fun populateDatabase(weatherDao: WeatherDao) {
             weatherDao.deleteAll()
-            weatherDao.insert(WeatherEntity("Vaughan"))
-            weatherDao.insert(WeatherEntity("New York"))
+//            weatherDao.insert(WeatherEntity("Vaughan"))
+//            weatherDao.insert(WeatherEntity("New York"))
         }
     }
 }
