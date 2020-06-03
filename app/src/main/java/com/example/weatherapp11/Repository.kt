@@ -26,6 +26,9 @@ class Repository(var weatherDao: WeatherDao) {
 
     fun getWeather(cityList: List<String>): LiveData<ArrayList<WeatherInfo>> {
         val tempList: ArrayList<WeatherInfo> = ArrayList()
+        if (cityList.isEmpty())
+            return MutableLiveData()
+
         cityList.forEach {city ->
             cities = jsonWeatherApi.getWeatherInfo(city, "65c8bbb29469fa0f101001642a325d13")
             cities.enqueue(object : Callback<WeatherInfo> {
@@ -54,6 +57,10 @@ class Repository(var weatherDao: WeatherDao) {
 
     suspend fun delete(city: String) {
         weatherDao.delete(WeatherEntity(city))
+    }
+
+    suspend fun selectDelete(city: String) {
+        weatherDao.selectDelete(city)
     }
 
     suspend fun deleteAll() {

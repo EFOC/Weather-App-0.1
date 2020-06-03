@@ -1,10 +1,8 @@
 package com.example.weatherapp11.ViewModels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.Repository
 import com.example.weatherapp11.WeatherDatabase
@@ -15,16 +13,16 @@ import kotlinx.coroutines.runBlocking
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
     private var repo: Repository
-    var weatherList: ArrayList<LiveData<WeatherInfo>>
+    private lateinit var weatherList: LiveData<ArrayList<WeatherInfo>>
     var mediatorLiveData = MediatorLiveData<List<Any>>()
 
     init {
         val weatherDao = WeatherDatabase.getInstance(application, viewModelScope)!!.weatherDao()
         repo = Repository(weatherDao)
-        weatherList = ArrayList()
+//        weatherList = ArrayList()
     }
 
-    fun getWeather(cities: List<String>): LiveData<ArrayList<WeatherInfo>> {
+    private fun getWeather(cities: List<String>): LiveData<ArrayList<WeatherInfo>> {
         return repo.getWeather(cities)
     }
 
@@ -41,6 +39,12 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     fun delete(city: String) {
         viewModelScope.launch {
             repo.delete(city)
+        }
+    }
+
+    fun selectDelete(city: String) {
+        viewModelScope.launch {
+            repo.selectDelete(city)
         }
     }
 
