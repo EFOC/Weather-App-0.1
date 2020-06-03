@@ -38,9 +38,15 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun delete(city: WeatherEntity) {
+    fun delete(city: String) {
         viewModelScope.launch {
             repo.delete(city)
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch {
+            repo.deleteAll()
         }
     }
 }

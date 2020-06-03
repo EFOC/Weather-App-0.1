@@ -52,7 +52,11 @@ class Repository(var weatherDao: WeatherDao) {
         return weatherDao.getAllWeather()
     }
 
-    suspend fun delete(city: WeatherEntity) {
-        weatherDao.delete(city)
+    suspend fun delete(city: String) {
+        weatherDao.delete(WeatherEntity(city))
+    }
+
+    suspend fun deleteAll() {
+        weatherDao.deleteAll()
     }
 }
