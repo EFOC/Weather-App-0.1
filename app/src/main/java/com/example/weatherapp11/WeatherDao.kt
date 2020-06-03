@@ -1,20 +1,22 @@
 package com.example.weatherapp11
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
-import com.example.weatherapp11.Model.WeatherInfo
+import androidx.room.*
 
+@Dao
 interface WeatherDao {
 
     @Insert
-    fun insert(weather: WeatherInfo)
+    suspend fun insert(city: WeatherEntity)
 
     @Update
-    fun update(weather: WeatherInfo)
+    suspend fun update(city: WeatherEntity)
 
     @Delete
-    fun delete(weather: WeatherInfo)
+    suspend fun delete(city: WeatherEntity)
 
+    @Query("SELECT * FROM weather_table")
+    suspend fun getAllWeather(): List<String>
 
+    @Query("DELETE FROM weather_table")
+    suspend fun deleteAll()
 }

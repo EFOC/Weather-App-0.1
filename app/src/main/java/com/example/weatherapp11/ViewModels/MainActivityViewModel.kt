@@ -1,21 +1,46 @@
 package com.example.weatherapp11.ViewModels
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.Repository
+import com.example.weatherapp11.WeatherDatabase
+import com.example.weatherapp11.WeatherEntity
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-class MainActivityViewModel: ViewModel() {
-    var repo: Repository
-    var list: MutableLiveData<ArrayList<WeatherInfo?>>
+
+class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
+    private var repo: Repository
+    var weatherList: ArrayList<LiveData<WeatherInfo>>
+    var mediatorLiveData = MediatorLiveData<List<Any>>()
 
     init {
-        list = MutableLiveData()
-        repo = Repository
+        val weatherDao = WeatherDatabase.getInstance(application, viewModelScope)!!.weatherDao()
+        repo = Repository(weatherDao)
+        weatherList = ArrayList()
     }
 
-    fun getAllWeather(city: String): MutableLiveData<ArrayList<WeatherInfo?>> {
-        list = repo.getWeather(city)
-        return list
+    fun getWeather(cities: List<String>): LiveData<ArrayList<WeatherInfo>> {
+        return repo.getWeather(cities)
+    }
+
+    fun getAll(): LiveData<ArrayList<WeatherInfo>> = runBlocking {
+        return@runBlocking getWeather(repo.getAll())
+    }
+
+    fun insert(city: String) {
+        viewModelScope.launch {
+            repo.insert(city)
+        }
+    }
+
+    fun delete(city: WeatherEntity) {
+        viewModelScope.launch {
+            repo.delete(city)
+        }
     }
 }
