@@ -6,12 +6,15 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Adapters.RecyclerViewAdapter
+import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.ViewModels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +40,23 @@ class MainActivity : AppCompatActivity() {
         btn.setOnClickListener {
             refreshWeatherList()
         }
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
+        ItemTouchHelper.LEFT and ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                mainActivityViewModel.delete(WeatherEntity(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity))
+                Toast.makeText(this@MainActivity, "Deleting item...", Toast.LENGTH_SHORT).show()
+            }
+
+        }).attachToRecyclerView(recyclerView)
     }
 
     private fun initRecyclerView() {

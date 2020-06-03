@@ -35,6 +35,10 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
         weatherList = list
     }
 
+    fun getItemAt(position: Int): WeatherInfo {
+        return weatherList[position]
+    }
+
     class ViewHolder(itemHolder: View): RecyclerView.ViewHolder(itemHolder) {
         var cityName: TextView = itemHolder.findViewById(R.id.item_city_name)
         var feelsLike: TextView = itemHolder.findViewById(R.id.item_feels_like)
