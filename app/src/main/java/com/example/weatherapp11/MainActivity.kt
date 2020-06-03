@@ -2,19 +2,16 @@ package com.example.weatherapp11
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Adapters.RecyclerViewAdapter
-import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.ViewModels.MainActivityViewModel
 
 
@@ -66,8 +63,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null) {
-            val city = data.getStringExtra("city")
-            mainActivityViewModel.insert(city)
+            mainActivityViewModel.insert(data.getStringExtra("city"))
             refreshWeatherList()
         }
     }
