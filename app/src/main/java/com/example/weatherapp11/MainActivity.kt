@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Adapters.RecyclerViewAdapter
-import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.ViewModels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -31,11 +30,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerview)
         mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
         initRecyclerView()
-
-        mainActivityViewModel.getWeather(listOf("Toronto", "New York")).observe(this, Observer {
-            adapter.setWeather(it)
-            recyclerView.adapter = adapter
-        })
 
         btn = findViewById(R.id.btn)
         btn.setOnClickListener {
@@ -56,12 +50,10 @@ class MainActivity : AppCompatActivity() {
             ): Boolean = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                Log.d("TEST", "item selected ${adapter.getItemAt(viewHolder.adapterPosition).nameOfCity} ")
-                mainActivityViewModel.delete(WeatherEntity(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity))
+                mainActivityViewModel.delete(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity)
                 Toast.makeText(this@MainActivity, "Deleting item...", Toast.LENGTH_SHORT).show()
-//                refreshWeatherList()
+                refreshWeatherList()
             }
-
         }).attachToRecyclerView(recyclerView)
     }
 
@@ -75,6 +67,9 @@ class MainActivity : AppCompatActivity() {
         if (item?.itemId == R.id.menu_add_item) {
             val intent = Intent(this, AddWeatherItemActivity::class.java)
             startActivityForResult(intent, 1)
+        } else if (item?.itemId == R.id.menu_delete_all) {
+            mainActivityViewModel.deleteAll()
+            Toast.makeText(this, "Deleting all items...", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -88,11 +83,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshWeatherList() {
-        // TODO: fix the deleting last item in database
+        adapter.setWeather(ArrayList())
+        recyclerView.adapter = adapter
         mainActivityViewModel.getAll().observe(this, Observer {cityList ->
-            cityList.forEach {
-                Log.d("TEST", "Items in database: ${it.nameOfCity}")
-            }
             adapter.setWeather(cityList)
             recyclerView.adapter = adapter
         })
