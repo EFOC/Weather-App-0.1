@@ -38,6 +38,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation "androidx.room:room-ktx:$room_version"
+    // Google Places API
+    implementation 'com.google.android.libraries.places:places:2.2.0'
     // Room components
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:2.2.5"
