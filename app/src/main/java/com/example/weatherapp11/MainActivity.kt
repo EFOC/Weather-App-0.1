@@ -40,9 +40,14 @@ class MainActivity : AppCompatActivity() {
         btn.setOnClickListener {
             refreshWeatherList()
         }
+    }
 
+    private fun initRecyclerView() {
+        adapter = RecyclerViewAdapter(this)
+        val linearLayout = LinearLayoutManager(this)
+        recyclerView.layoutManager = linearLayout
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
-        ItemTouchHelper.LEFT and ItemTouchHelper.RIGHT) {
+            ItemTouchHelper.LEFT and ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -57,12 +62,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }).attachToRecyclerView(recyclerView)
-    }
-
-    private fun initRecyclerView() {
-        adapter = RecyclerViewAdapter(this)
-        val linearLayout = LinearLayoutManager(this)
-        recyclerView.layoutManager = linearLayout
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
