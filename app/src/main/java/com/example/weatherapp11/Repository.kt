@@ -51,4 +51,8 @@ class Repository(var weatherDao: WeatherDao) {
     suspend fun getAll(): List<String> {
         return weatherDao.getAllWeather()
     }
+
+    suspend fun delete(city: WeatherEntity) {
+        weatherDao.delete(city)
+    }
 }

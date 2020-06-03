@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.Repository
 import com.example.weatherapp11.WeatherDatabase
+import com.example.weatherapp11.WeatherEntity
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -31,10 +32,15 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         return@runBlocking getWeather(repo.getAll())
     }
 
-    // @TODO Insert only name of city
     fun insert(city: String) {
         viewModelScope.launch {
             repo.insert(city)
+        }
+    }
+
+    fun delete(city: WeatherEntity) {
+        viewModelScope.launch {
+            repo.delete(city)
         }
     }
 }
