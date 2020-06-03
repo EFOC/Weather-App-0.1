@@ -13,11 +13,7 @@ import com.example.weatherapp11.R
 
 class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-      var weatherList: List<WeatherInfo>
-
-    init {
-        weatherList = ArrayList()
-    }
+    private lateinit var weatherList: List<WeatherInfo>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.weather_item, parent, false)
@@ -35,7 +31,7 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
         holder.minTemp.text = "Min Temp: " + weatherList.get(position)?.mainInfo?.minTemp.toString()
     }
 
-    fun setWeather(list: ArrayList<WeatherInfo>){
+    fun setWeather(list: List<WeatherInfo>){
         weatherList = list
     }
 

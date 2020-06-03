@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Adapters.RecyclerViewAdapter
 import com.example.weatherapp11.ViewModels.MainActivityViewModel
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainActivityViewModel: MainActivityViewModel
@@ -69,8 +68,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshWeatherList() {
-        mainActivityViewModel.getAll().observe(this, Observer {
-            adapter.setWeather(it)
+        mainActivityViewModel.getAll().observe(this, Observer {cityList ->
+            adapter.setWeather(cityList)
             recyclerView.adapter = adapter
         })
     }
