@@ -36,6 +36,12 @@
             android:text="Done"
             android:textSize="15sp" />
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
+
     </LinearLayout>
 
 </layout>
