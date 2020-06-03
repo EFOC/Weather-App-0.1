@@ -42,12 +42,6 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun selectDelete(city: String) {
-        viewModelScope.launch {
-            repo.selectDelete(city)
-        }
-    }
-
     fun deleteAll() {
         viewModelScope.launch {
             repo.deleteAll()

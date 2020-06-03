@@ -52,13 +52,10 @@ class MainActivity : AppCompatActivity() {
             ): Boolean = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                Log.d("TEST", "item selected ${adapter.getItemAt(viewHolder.adapterPosition).nameOfCity} ")
-//                mainActivityViewModel.delete(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity)
-                mainActivityViewModel.selectDelete(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity)
+                mainActivityViewModel.delete(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity)
                 Toast.makeText(this@MainActivity, "Deleting item...", Toast.LENGTH_SHORT).show()
-//                refreshWeatherList()
+                refreshWeatherList()
             }
-
         }).attachToRecyclerView(recyclerView)
     }
 

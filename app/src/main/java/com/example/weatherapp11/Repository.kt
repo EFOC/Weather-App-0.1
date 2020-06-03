@@ -59,10 +59,6 @@ class Repository(var weatherDao: WeatherDao) {
         weatherDao.delete(WeatherEntity(city))
     }
 
-    suspend fun selectDelete(city: String) {
-        weatherDao.selectDelete(city)
-    }
-
     suspend fun deleteAll() {
         weatherDao.deleteAll()
     }
