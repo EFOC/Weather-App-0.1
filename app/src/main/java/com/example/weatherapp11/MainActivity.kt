@@ -9,14 +9,12 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Adapters.RecyclerViewAdapter
-import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.ViewModels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
