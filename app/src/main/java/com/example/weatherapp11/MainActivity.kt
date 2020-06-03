@@ -2,6 +2,7 @@ package com.example.weatherapp11
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -47,18 +48,18 @@ class MainActivity : AppCompatActivity() {
         val linearLayout = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayout
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
-            ItemTouchHelper.LEFT and ItemTouchHelper.RIGHT) {
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
+            ): Boolean = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                Log.d("TEST", "item selected ${adapter.getItemAt(viewHolder.adapterPosition).nameOfCity} ")
                 mainActivityViewModel.delete(WeatherEntity(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity))
                 Toast.makeText(this@MainActivity, "Deleting item...", Toast.LENGTH_SHORT).show()
+//                refreshWeatherList()
             }
 
         }).attachToRecyclerView(recyclerView)
@@ -87,7 +88,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshWeatherList() {
+        // TODO: fix the deleting last item in database
         mainActivityViewModel.getAll().observe(this, Observer {cityList ->
+            cityList.forEach {
+                Log.d("TEST", "Items in database: ${it.nameOfCity}")
+            }
             adapter.setWeather(cityList)
             recyclerView.adapter = adapter
         })
