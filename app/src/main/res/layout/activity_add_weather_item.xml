@@ -17,15 +17,12 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/add_weather_city_name"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_add_item"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:hint="City Name"
-            android:singleLine="true"
-            android:textAlignment="center" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
 
         <Button
             android:id="@+id/add_weather_done_btn"
@@ -35,12 +32,6 @@
             android:layout_marginTop="20dp"
             android:text="Done"
             android:textSize="15sp" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_add_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
 
     </LinearLayout>
 

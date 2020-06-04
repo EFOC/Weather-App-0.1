@@ -25,24 +25,32 @@ class AddWeatherItemActivity : AppCompatActivity() {
     private val API_KEY = "AIzaSyCI9kZvQL35PVVrVYtrNJChXS9itiH1k9s"
     lateinit var completeButton: Button
     lateinit var addWeatherItemViewModel: AddWeatherItemViewModel
-    lateinit var cityNameEditText: EditText
+    private var placeSelected: String = String()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_weather_item)
 
-        // Initialize the SDK
+        googleAutocompleteInit()
+        addWeatherItemViewModel = ViewModelProviders.of(this).get(AddWeatherItemViewModel::class.java)
+
+        completeButton = findViewById(R.id.add_weather_done_btn)
+        completeButton.setOnClickListener {
+            val result = Intent()
+            result.putExtra("city", placeSelected)
+            setResult(Activity.RESULT_OK, result)
+            finish()
+        }
+    }
+
+    private fun googleAutocompleteInit() {
         Places.initialize(applicationContext, API_KEY)
-        // Create a new Places client instance
-        val placesClient = Places.createClient(this)
-
         val autocompleteSupportFragment: AutocompleteSupportFragment = supportFragmentManager.findFragmentById(R.id.fragment_add_item) as AutocompleteSupportFragment
-
         autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG,Place.Field.ADDRESS))
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                val latLng: LatLng = place.latLng!!
-                Log.d("TEST", "Found place: $latLng")
+                placeSelected = place.name!!
+                Log.d("TEST", "Found place: ${place.name}")
             }
 
             override fun onError(status: Status) {
@@ -50,15 +58,5 @@ class AddWeatherItemActivity : AppCompatActivity() {
             }
 
         })
-        addWeatherItemViewModel = ViewModelProviders.of(this).get(AddWeatherItemViewModel::class.java)
-
-        cityNameEditText = findViewById(R.id.add_weather_city_name)
-        completeButton = findViewById(R.id.add_weather_done_btn)
-        completeButton.setOnClickListener {
-            val result = Intent()
-            result.putExtra("city", cityNameEditText.text.trim().toString())
-            setResult(Activity.RESULT_OK, result)
-            finish()
-        }
     }
 }
