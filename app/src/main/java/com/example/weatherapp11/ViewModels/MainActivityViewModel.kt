@@ -1,16 +1,20 @@
 package com.example.weatherapp11.ViewModels
 
 import android.app.Application
+import android.view.View
+import android.widget.ProgressBar
 import androidx.lifecycle.*
 import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.Repository
 import com.example.weatherapp11.WeatherDatabase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
     private var repo: Repository
+    lateinit var progressSpinner: ProgressBar
 
     init {
         val weatherDao = WeatherDatabase.getInstance(application, viewModelScope)!!.weatherDao()
@@ -19,6 +23,13 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private fun getWeather(cities: List<String>): LiveData<ArrayList<WeatherInfo>> {
         return repo.getWeather(cities)
+    }
+
+    fun refreshList() {
+        viewModelScope.launch {
+            delay(5_000)
+            progressSpinner.visibility = View.GONE
+        }
     }
 
     fun getAll(): LiveData<ArrayList<WeatherInfo>> = runBlocking {
