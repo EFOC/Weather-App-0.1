@@ -2,11 +2,12 @@ package com.example.weatherapp11
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -22,19 +23,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecyclerViewAdapter
-    lateinit var btn: Button
+    private lateinit var btn: Button
+    private lateinit var progressSpinner: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.recyclerview)
         mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
+        spinnerInit()
         initRecyclerView()
 
         btn = findViewById(R.id.btn)
         btn.setOnClickListener {
             refreshWeatherList()
         }
+    }
+
+    private fun spinnerInit() {
+        progressSpinner = findViewById(R.id.progressBar)
+        progressSpinner.visibility = View.GONE
+        mainActivityViewModel.progressSpinner = progressSpinner
     }
 
     private fun initRecyclerView() {
@@ -83,11 +92,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshWeatherList() {
-        adapter.setWeather(ArrayList())
-        recyclerView.adapter = adapter
         mainActivityViewModel.getAll().observe(this, Observer {cityList ->
+            progressSpinner.visibility = View.GONE
             adapter.setWeather(cityList)
             recyclerView.adapter = adapter
         })
+        progressSpinner.visibility = View.VISIBLE
+        adapter.setWeather(ArrayList())
+        recyclerView.adapter = adapter
+        mainActivityViewModel.refreshList()
     }
 }
