@@ -10,6 +10,6 @@
     <string name="recycler_adapter_min_temp">Min Temp: %1$s</string>
 
     // MainActivity Strings
-    <string name="main_activity_delete_all">Deleting all items...</string>
+    <string name="main_activity_delete_all">Deleting all items…</string>
     <string name="main_activity_delete_item">Deleting %1$s</string>
 </resources>
