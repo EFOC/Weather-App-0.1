@@ -52,7 +52,7 @@ class Repository(var weatherDao: WeatherDao) {
     }
 
     suspend fun getAll(): List<String> {
-        return weatherDao.getAllWeather()
+        return weatherDao.getAll()
     }
 
     suspend fun delete(city: String) {
