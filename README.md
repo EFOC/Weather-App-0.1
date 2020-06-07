@@ -5,13 +5,14 @@
 This app uses:
 
 * RecyclerView
-* Swipe to delete
 * Coroutines
 * LiveData
 * Room Database
 * Reftrofit2 framework
 * Google Places API - to get the names of cities
 * Weather API - to get the weather data of the cities provided
+* Uses Loading Spinner while fetching data, disappears after 3 seconds of no updates
+* Swipe to delete
 
 ## **DEMO**
 
