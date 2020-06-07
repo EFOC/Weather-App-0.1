@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -26,7 +26,7 @@ class AddWeatherItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_weather_item)
 
         googleAutocompleteInit()
-        addWeatherItemViewModel = ViewModelProviders.of(this).get(AddWeatherItemViewModel::class.java)
+        addWeatherItemViewModel = ViewModelProvider(this).get(AddWeatherItemViewModel::class.java)
 
         completeButton = findViewById(R.id.add_weather_done_btn)
         completeButton.setOnClickListener {
