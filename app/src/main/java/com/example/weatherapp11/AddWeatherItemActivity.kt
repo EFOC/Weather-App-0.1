@@ -44,11 +44,10 @@ class AddWeatherItemActivity : AppCompatActivity() {
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 placeSelected = place.name!!
-                Log.d("TEST", "Found place: ${place.name}")
             }
 
             override fun onError(status: Status) {
-                Log.d("TEST", "Status: ${status.statusMessage}")
+                Log.d("Error", "Status: ${status.statusMessage}")
             }
 
         })
