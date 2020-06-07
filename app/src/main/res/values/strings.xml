@@ -10,4 +10,5 @@
     // MainActivity Strings
     <string name="main_activity_delete_all">Deleting all items…</string>
     <string name="main_activity_delete_item">Deleting %1$s</string>
+    <string name="main_activity_refresh_button">Refresh List</string>
 </resources>

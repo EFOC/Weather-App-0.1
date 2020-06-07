@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         spinnerInit()
         initRecyclerView()
 
-        refreshButton = findViewById(R.id.btn)
+        refreshButton = findViewById(R.id.refresh_button)
         refreshButton.setOnClickListener {
             refreshWeatherList()
         }
