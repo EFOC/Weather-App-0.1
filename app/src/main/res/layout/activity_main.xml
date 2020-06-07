@@ -5,17 +5,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".activities.MainActivity" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/refresh_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get All" />
+        android:text="@string/main_activity_refresh_button" />
 
     <ProgressBar
         android:id="@+id/progressBar"

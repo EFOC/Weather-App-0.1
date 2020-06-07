@@ -1,4 +1,4 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapp11.BuildConfig
+import com.example.weatherapp11.R
+import com.example.weatherapp11.viewModels.AddWeatherItemViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -16,7 +19,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 
 class AddWeatherItemActivity : AppCompatActivity() {
 
-    private val API_KEY = "AIzaSyCI9kZvQL35PVVrVYtrNJChXS9itiH1k9s"
+    private val API_KEY = BuildConfig.GooglePlacesAPI
     private lateinit var completeButton: Button
     private lateinit var addWeatherItemViewModel: AddWeatherItemViewModel
     private var placeSelected: String = String()
@@ -26,7 +29,7 @@ class AddWeatherItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_weather_item)
 
         googleAutocompleteInit()
-        addWeatherItemViewModel = ViewModelProviders.of(this).get(AddWeatherItemViewModel::class.java)
+        addWeatherItemViewModel = ViewModelProvider(this).get(AddWeatherItemViewModel::class.java)
 
         completeButton = findViewById(R.id.add_weather_done_btn)
         completeButton.setOnClickListener {
@@ -39,18 +42,18 @@ class AddWeatherItemActivity : AppCompatActivity() {
 
     private fun googleAutocompleteInit() {
         Places.initialize(applicationContext, API_KEY)
-        val autocompleteSupportFragment: AutocompleteSupportFragment = supportFragmentManager.findFragmentById(R.id.fragment_add_item) as AutocompleteSupportFragment
-        autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG,Place.Field.ADDRESS))
+        val autocompleteSupportFragment: AutocompleteSupportFragment = supportFragmentManager.findFragmentById(
+            R.id.fragment_add_item
+        ) as AutocompleteSupportFragment
+        autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 placeSelected = place.name!!
-                Log.d("TEST", "Found place: ${place.name}")
             }
 
             override fun onError(status: Status) {
-                Log.d("TEST", "Status: ${status.statusMessage}")
+                Log.d("Error", "Status: ${status.statusMessage}")
             }
-
         })
     }
 }

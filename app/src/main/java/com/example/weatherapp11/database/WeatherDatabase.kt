@@ -1,4 +1,4 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.database
 
 import android.content.Context
 import androidx.room.Database
@@ -24,7 +24,11 @@ abstract class WeatherDatabase: RoomDatabase() {
                     context.applicationContext,
                     WeatherDatabase::class.java,
                     "weather_database")
-                    .addCallback(WeatherDatabaseCallback(scope))
+                    .addCallback(
+                        WeatherDatabaseCallback(
+                            scope
+                        )
+                    )
                     .fallbackToDestructiveMigration()
                     .build()
             }

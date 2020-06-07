@@ -1,4 +1,4 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.database
 
 import androidx.room.*
 
@@ -15,7 +15,7 @@ interface WeatherDao {
     suspend fun delete(city: WeatherEntity)
 
     @Query("SELECT * FROM weather_table")
-    suspend fun getAllWeather(): List<String>
+    suspend fun getAll(): List<String>
 
     @Query("DELETE FROM weather_table")
     suspend fun deleteAll()

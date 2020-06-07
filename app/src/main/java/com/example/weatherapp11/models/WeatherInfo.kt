@@ -1,4 +1,4 @@
-package com.example.weatherapp11.Model
+package com.example.weatherapp11.models
 
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName

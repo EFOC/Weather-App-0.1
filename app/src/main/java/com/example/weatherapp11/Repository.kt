@@ -3,18 +3,22 @@ package com.example.weatherapp11
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.weatherapp11.Model.WeatherInfo
+import com.example.weatherapp11.apis.JsonWeatherApi
+import com.example.weatherapp11.database.WeatherDao
+import com.example.weatherapp11.database.WeatherEntity
+import com.example.weatherapp11.models.WeatherInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Repository(var weatherDao: WeatherDao) {
+class Repository(private val weatherDao: WeatherDao) {
 
+    private val WEATHER_API = BuildConfig.WeatherAPI
     private var jsonWeatherApi: JsonWeatherApi
     lateinit var cities: Call<WeatherInfo>
-    val liveDataList: MutableLiveData<ArrayList<WeatherInfo>> = MutableLiveData()
+    private val liveDataList: MutableLiveData<ArrayList<WeatherInfo>> = MutableLiveData()
 
     init {
         val retrofit = Retrofit.Builder()
@@ -30,10 +34,10 @@ class Repository(var weatherDao: WeatherDao) {
             return MutableLiveData()
 
         cityList.forEach {city ->
-            cities = jsonWeatherApi.getWeatherInfo(city, "65c8bbb29469fa0f101001642a325d13")
+            cities = jsonWeatherApi.getWeatherInfo(city, WEATHER_API)
             cities.enqueue(object : Callback<WeatherInfo> {
                 override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
-                    Log.d("TEST", "Code: " + t.toString())
+                    Log.d("Error", "Code: $t")
                 }
 
                 override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
@@ -52,7 +56,7 @@ class Repository(var weatherDao: WeatherDao) {
     }
 
     suspend fun getAll(): List<String> {
-        return weatherDao.getAllWeather()
+        return weatherDao.getAll()
     }
 
     suspend fun delete(city: String) {

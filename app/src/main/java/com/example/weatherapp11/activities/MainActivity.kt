@@ -1,4 +1,4 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,31 +11,32 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp11.Adapters.RecyclerViewAdapter
-import com.example.weatherapp11.ViewModels.MainActivityViewModel
+import com.example.weatherapp11.R
+import com.example.weatherapp11.adapters.RecyclerViewAdapter
+import com.example.weatherapp11.viewModels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecyclerViewAdapter
-    private lateinit var btn: Button
+    private lateinit var refreshButton: Button
     private lateinit var progressSpinner: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.recyclerview)
-        mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
+        mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         spinnerInit()
         initRecyclerView()
 
-        btn = findViewById(R.id.btn)
-        btn.setOnClickListener {
+        refreshButton = findViewById(R.id.refresh_button)
+        refreshButton.setOnClickListener {
             refreshWeatherList()
         }
     }
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 mainActivityViewModel.delete(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity)
-                Toast.makeText(this@MainActivity, "Deleting item...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, getString(R.string.main_activity_delete_item, adapter.getItemAt(viewHolder.adapterPosition).nameOfCity), Toast.LENGTH_SHORT).show()
                 refreshWeatherList()
             }
         }).attachToRecyclerView(recyclerView)
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, 1)
         } else if (item?.itemId == R.id.menu_delete_all) {
             mainActivityViewModel.deleteAll()
-            Toast.makeText(this, "Deleting all items...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.main_activity_delete_all), Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }
