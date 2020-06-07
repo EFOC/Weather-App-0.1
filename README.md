@@ -4,7 +4,8 @@ Weather App 0.1
 Welcome!
 
 This app uses:
-RecyclerView
+
+*RecyclerView
 Swipe to delete
 Coroutines
 LiveData
