@@ -2,10 +2,14 @@
     <string name="app_name">WeatherApp1.1</string>
     <string name="weather_api_key">65c8bbb29469fa0f101001642a325d13</string>
     <string name="base_url">https://api.openweathermap.org/data/2.5/</string>
+
+    // Recycler Adapter Strings
     <string name="recycler_adapter_city_name">City Name: %1$s</string>
     <string name="recycler_adapter_feels_like">Feels Like: %1$s</string>
     <string name="recycler_adapter_max_temp">Max Temp: %1$s</string>
     <string name="recycler_adapter_min_temp">Min Temp: %1$s</string>
+
+    // MainActivity Strings
     <string name="main_activity_delete_all">Deleting all items...</string>
     <string name="main_activity_delete_item">Deleting %1$s</string>
 </resources>
