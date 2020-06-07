@@ -12,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Repository(private val weatherDao: WeatherDao) {
 
+    private val WEATHER_API = BuildConfig.WeatherAPI
     private var jsonWeatherApi: JsonWeatherApi
     lateinit var cities: Call<WeatherInfo>
     private val liveDataList: MutableLiveData<ArrayList<WeatherInfo>> = MutableLiveData()
@@ -30,7 +31,7 @@ class Repository(private val weatherDao: WeatherDao) {
             return MutableLiveData()
 
         cityList.forEach {city ->
-            cities = jsonWeatherApi.getWeatherInfo(city, "65c8bbb29469fa0f101001642a325d13")
+            cities = jsonWeatherApi.getWeatherInfo(city, WEATHER_API)
             cities.enqueue(object : Callback<WeatherInfo> {
                 override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
                     Log.d("Error", "Code: $t")

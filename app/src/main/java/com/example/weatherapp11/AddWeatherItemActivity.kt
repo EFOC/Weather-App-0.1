@@ -16,7 +16,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 
 class AddWeatherItemActivity : AppCompatActivity() {
 
-    private val API_KEY = "AIzaSyCI9kZvQL35PVVrVYtrNJChXS9itiH1k9s"
+    private val API_KEY = BuildConfig.GooglePlacesAPI
     private lateinit var completeButton: Button
     private lateinit var addWeatherItemViewModel: AddWeatherItemViewModel
     private var placeSelected: String = String()
