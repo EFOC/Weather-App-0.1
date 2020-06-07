@@ -5,14 +5,14 @@ Welcome!
 
 This app uses:
 
-*RecyclerView
-Swipe to delete
-Coroutines
-LiveData
-Room Database
-Reftrofit2 framework
-Google Places API - to get the names of cities
-Weather API - to get the weather data of the cities provided
+* RecyclerView
+* Swipe to delete
+* Coroutines
+* LiveData
+* Room Database
+* Reftrofit2 framework
+* Google Places API - to get the names of cities
+* Weather API - to get the weather data of the cities provided
 
 Show casing some of the features this app has:
 
