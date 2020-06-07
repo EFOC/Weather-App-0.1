@@ -10,11 +10,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Repository(var weatherDao: WeatherDao) {
+class Repository(private val weatherDao: WeatherDao) {
 
     private var jsonWeatherApi: JsonWeatherApi
     lateinit var cities: Call<WeatherInfo>
-    val liveDataList: MutableLiveData<ArrayList<WeatherInfo>> = MutableLiveData()
+    private val liveDataList: MutableLiveData<ArrayList<WeatherInfo>> = MutableLiveData()
 
     init {
         val retrofit = Retrofit.Builder()
@@ -33,7 +33,7 @@ class Repository(var weatherDao: WeatherDao) {
             cities = jsonWeatherApi.getWeatherInfo(city, "65c8bbb29469fa0f101001642a325d13")
             cities.enqueue(object : Callback<WeatherInfo> {
                 override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
-                    Log.d("TEST", "Code: " + t.toString())
+                    Log.d("Error", "Code: $t")
                 }
 
                 override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
