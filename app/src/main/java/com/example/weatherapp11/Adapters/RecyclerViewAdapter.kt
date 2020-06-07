@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.R
 
-class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var weatherList: List<WeatherInfo>
 
