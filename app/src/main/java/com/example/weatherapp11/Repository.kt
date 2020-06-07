@@ -3,7 +3,7 @@ package com.example.weatherapp11
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.weatherapp11.Model.WeatherInfo
+import com.example.weatherapp11.models.WeatherInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

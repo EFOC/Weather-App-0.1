@@ -15,8 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp11.Adapters.RecyclerViewAdapter
-import com.example.weatherapp11.ViewModels.MainActivityViewModel
+import com.example.weatherapp11.adapters.RecyclerViewAdapter
+import com.example.weatherapp11.viewModels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 

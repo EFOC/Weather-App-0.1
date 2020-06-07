@@ -1,4 +1,4 @@
-package com.example.weatherapp11.Model
+package com.example.weatherapp11.models
 
 class Coordinates {
 

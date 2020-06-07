@@ -1,10 +1,10 @@
-package com.example.weatherapp11.ViewModels
+package com.example.weatherapp11.viewModels
 
 import android.app.Application
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.*
-import com.example.weatherapp11.Model.WeatherInfo
+import com.example.weatherapp11.models.WeatherInfo
 import com.example.weatherapp11.Repository
 import com.example.weatherapp11.WeatherDatabase
 import kotlinx.coroutines.delay

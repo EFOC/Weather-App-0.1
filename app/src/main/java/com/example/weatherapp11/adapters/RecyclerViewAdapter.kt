@@ -1,4 +1,4 @@
-package com.example.weatherapp11.Adapters
+package com.example.weatherapp11.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp11.Model.WeatherInfo
+import com.example.weatherapp11.models.WeatherInfo
 import com.example.weatherapp11.R
 
 class RecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
