@@ -1,4 +1,4 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapp11.R
 import com.example.weatherapp11.adapters.RecyclerViewAdapter
 import com.example.weatherapp11.viewModels.MainActivityViewModel
 

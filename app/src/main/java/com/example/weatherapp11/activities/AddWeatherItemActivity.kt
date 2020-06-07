@@ -1,4 +1,4 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapp11.BuildConfig
+import com.example.weatherapp11.R
 import com.example.weatherapp11.viewModels.AddWeatherItemViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -40,7 +42,9 @@ class AddWeatherItemActivity : AppCompatActivity() {
 
     private fun googleAutocompleteInit() {
         Places.initialize(applicationContext, API_KEY)
-        val autocompleteSupportFragment: AutocompleteSupportFragment = supportFragmentManager.findFragmentById(R.id.fragment_add_item) as AutocompleteSupportFragment
+        val autocompleteSupportFragment: AutocompleteSupportFragment = supportFragmentManager.findFragmentById(
+            R.id.fragment_add_item
+        ) as AutocompleteSupportFragment
         autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
