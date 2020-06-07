@@ -1,12 +1,10 @@
 package com.example.weatherapp11.Adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp11.Model.WeatherInfo
 import com.example.weatherapp11.R
@@ -25,10 +23,10 @@ class RecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<RecyclerV
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cityName.text = "City Name: " + weatherList.get(position)?.nameOfCity.toString()
-        holder.feelsLike.text = "Feels Like: " + weatherList.get(position)?.mainInfo?.maxTemp.toString()
-        holder.maxTemp.text = "Max Temp: " + weatherList.get(position)?.mainInfo?.maxTemp.toString()
-        holder.minTemp.text = "Min Temp: " + weatherList.get(position)?.mainInfo?.minTemp.toString()
+        holder.cityName.text = context.getString(R.string.recycler_adapter_city_name, weatherList[position].nameOfCity)
+        holder.feelsLike.text = context.getString(R.string.recycler_adapter_feels_like, weatherList[position].mainInfo.feelsLike.toString())
+        holder.maxTemp.text = context.getString(R.string.recycler_adapter_max_temp, weatherList[position].mainInfo.minTemp.toString())
+        holder.minTemp.text = context.getString(R.string.recycler_adapter_min_temp, weatherList[position].mainInfo.maxTemp.toString())
     }
 
     fun setWeather(list: List<WeatherInfo>){
