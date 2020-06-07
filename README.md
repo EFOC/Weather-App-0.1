@@ -1,7 +1,7 @@
 # Weather-App-0.1
 Weather App 0.1
 
-Welcome!
+###Welcome!
 
 This app uses:
 
@@ -13,6 +13,9 @@ This app uses:
 * Reftrofit2 framework
 * Google Places API - to get the names of cities
 * Weather API - to get the weather data of the cities provided
+
+## **DEMO**
+
 
 Show casing some of the features this app has:
 
