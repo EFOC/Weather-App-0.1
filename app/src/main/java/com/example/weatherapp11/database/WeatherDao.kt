@@ -1,6 +1,7 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.database
 
 import androidx.room.*
+import com.example.weatherapp11.WeatherEntity
 
 @Dao
 interface WeatherDao {

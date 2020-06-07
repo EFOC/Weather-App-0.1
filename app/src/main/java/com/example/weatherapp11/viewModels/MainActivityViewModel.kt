@@ -6,7 +6,7 @@ import android.widget.ProgressBar
 import androidx.lifecycle.*
 import com.example.weatherapp11.models.WeatherInfo
 import com.example.weatherapp11.Repository
-import com.example.weatherapp11.WeatherDatabase
+import com.example.weatherapp11.database.WeatherDatabase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

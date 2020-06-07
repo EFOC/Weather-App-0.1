@@ -1,10 +1,11 @@
-package com.example.weatherapp11
+package com.example.weatherapp11.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.weatherapp11.WeatherEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -24,7 +25,11 @@ abstract class WeatherDatabase: RoomDatabase() {
                     context.applicationContext,
                     WeatherDatabase::class.java,
                     "weather_database")
-                    .addCallback(WeatherDatabaseCallback(scope))
+                    .addCallback(
+                        WeatherDatabaseCallback(
+                            scope
+                        )
+                    )
                     .fallbackToDestructiveMigration()
                     .build()
             }
