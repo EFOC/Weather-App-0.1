@@ -33,4 +33,3 @@ Show casing the apps features
 ###### Deleting all items on list by tapping the icon:
 
 ![deleting all items on list](https://github.com/EFOC/Weather-App-0.1/blob/feature/add_gifs/app/gifs/deleting-all-items.gif)
----
