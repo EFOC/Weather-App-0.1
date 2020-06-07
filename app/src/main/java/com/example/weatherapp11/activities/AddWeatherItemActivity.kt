@@ -54,7 +54,6 @@ class AddWeatherItemActivity : AppCompatActivity() {
             override fun onError(status: Status) {
                 Log.d("Error", "Status: ${status.statusMessage}")
             }
-
         })
     }
 }
