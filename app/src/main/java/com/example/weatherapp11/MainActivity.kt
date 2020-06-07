@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecyclerViewAdapter
-    private lateinit var btn: Button
+    private lateinit var refreshButton: Button
     private lateinit var progressSpinner: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         spinnerInit()
         initRecyclerView()
 
-        btn = findViewById(R.id.btn)
-        btn.setOnClickListener {
+        refreshButton = findViewById(R.id.btn)
+        refreshButton.setOnClickListener {
             refreshWeatherList()
         }
     }
