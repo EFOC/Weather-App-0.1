@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 mainActivityViewModel.delete(adapter.getItemAt(viewHolder.adapterPosition).nameOfCity)
-                Toast.makeText(this@MainActivity, "Deleting item...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, getString(R.string.main_activity_delete_item, adapter.getItemAt(viewHolder.adapterPosition).nameOfCity), Toast.LENGTH_SHORT).show()
                 refreshWeatherList()
             }
         }).attachToRecyclerView(recyclerView)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, 1)
         } else if (item?.itemId == R.id.menu_delete_all) {
             mainActivityViewModel.deleteAll()
-            Toast.makeText(this, "Deleting all items...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.main_activity_delete_all), Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }

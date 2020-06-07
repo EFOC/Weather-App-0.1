@@ -6,4 +6,6 @@
     <string name="recycler_adapter_feels_like">Feels Like: %1$s</string>
     <string name="recycler_adapter_max_temp">Max Temp: %1$s</string>
     <string name="recycler_adapter_min_temp">Min Temp: %1$s</string>
+    <string name="main_activity_delete_all">Deleting all items...</string>
+    <string name="main_activity_delete_item">Deleting %1$s</string>
 </resources>
