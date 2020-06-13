@@ -4,7 +4,7 @@
 
 ##### OVERVIEW
 
-This is my Weather app. It is 100% written in Kotlin. It takes weather data from an API on a server and displays in a list on the app. It also uses Google's Places API to get a list of real life locations.
+This is my Weather app. It is 100% written in **Kotlin**. It takes weather data from an API on a server and displays in a list on the app. It also uses Google's Places API to get a list of real life locations.
 
 
 This app uses:
