@@ -9,6 +9,7 @@ This is my Weather app. It is 100% written in **Kotlin**. It takes weather data 
 
 This app uses:
 
+* Kotlin
 * RecyclerView
 * Coroutines
 * LiveData
